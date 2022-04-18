@@ -76,4 +76,8 @@ public class TextNote extends Note implements Serializable{
 			e.printStackTrace();
 		}
 	}
+	
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

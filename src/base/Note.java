@@ -51,8 +51,10 @@ public class Note implements Comparable<Note>,Serializable{
 			return 0;
 	}
 	
+	@Override
 	public String toString() {
 		return date.toString() + "\t" + title;
 	}
 	
+
 }

@@ -2,7 +2,6 @@ package base;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -78,6 +77,7 @@ public class Folder implements Comparable<Folder>, Serializable{
 	}
 	
 	public List<Note> searchNotes(String keywords){
+
 		List<Note> result = new ArrayList<Note>();	
 		List<Integer> list = new ArrayList<Integer>();
 		int count;
@@ -97,7 +97,7 @@ public class Folder implements Comparable<Folder>, Serializable{
 		for(Note n:notes) {
 			count = 0;
 			for(int i=0; i<tokens.length; i++) {
-				if(i == list.get(count)) {
+				if(count< list.size() && i == list.get(count)) {
 					i++;
 					count++;
 					if(i == tokens.length-1) {
@@ -138,7 +138,7 @@ public class Folder implements Comparable<Folder>, Serializable{
 						}
 					}
 					//case 2: check OR condition
-					else if(i+1 == list.get(count)) {
+					else if(count<list.size() && i+1 == list.get(count)) {
 						if(n.getTitle().toLowerCase().contains(tokens[i+2].toLowerCase())
 								|| ((TextNote)n).getContent().toLowerCase().contains(tokens[i+2].toLowerCase())) {
 							if(i == tokens.length-1) {
@@ -161,4 +161,20 @@ public class Folder implements Comparable<Folder>, Serializable{
 		}
 		return result;
 	}
+	
+	public boolean removeNotes(String title) {
+		   // TODO
+		   // Given the title of the note, delete it from the folder.
+		   // Return true if it is deleted successfully, otherwise return false. 
+		for(Note n:notes) {
+			if(n.getTitle().equals(title)) {
+				notes.remove(n);
+				return true;
+			}
+		}
+		//can't find
+		return false;
+	}
+
 }
+
